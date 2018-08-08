@@ -1,0 +1,54 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <%= link_to "Home",homepage_path,class: "navbar-brand " %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <li><%= link_to  "Directors Desk", directors_desk_path %></li>
+      <li><%= link_to "TEQIP Phase-III", guidelines_path %></li>
+      <li><%= link_to "NPIU",perf_a_report_path %></li>
+      <li><%= link_to "Statistics",statistics_path %></li>
+      <% if user_signed_in? && (current_user.user_type == "Director" || current_user.user_type == "Deputy_director" || current_user.user_type == "HOD_CSE" || current_user.user_type == "HOD_IT"|| current_user.user_type == "HOD_Civil"|| current_user.user_type == "HOD_Mechanical"|| current_user.user_type == "HOD_Electrical"|| current_user.user_type == "HOD_Electronics"|| current_user.user_type == "Admin")%>
+      <li><%= link_to "Proposal Summary", summary_page_path(current_user) %></li><% end %>
+  
+      <% if user_signed_in? && current_user.user_type != "Admin" %>
+      <li><%= link_to "My Proposal",proposals_path(current_user) %></li>
+      <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <% unless user_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="glyphicon glyphicon-th-large" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span></span></a>
+            <ul class="dropdown-menu">
+             <li><%= link_to "Login",new_user_session_path %></li>
+             
+              <li><%= link_to "Sign up", new_registration_path(resource_name) %></li>
+             
+            </ul>
+          </li>
+        <%else %>
+         <li class="dropdown">
+          <a href="#" class="glyphicon glyphicon-th-large" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span></span></a>
+          <ul class="dropdown-menu">
+           <li><%= link_to "Logout",destroy_user_session_path ,method: :delete %></li>
+          <% if current_user.user_type == "Student" %>
+            <li><%= link_to "Profile",profile_page_path(passed_user: current_user) %></li>
+          <% end %>
+          </ul>
+          </li> 
+        <% end %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

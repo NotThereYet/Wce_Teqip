@@ -1,0 +1,2 @@
+class TdocumentsController < ApplicationController
+end

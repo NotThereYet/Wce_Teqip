@@ -1,0 +1,73 @@
+<%= render 'partials/navbarhome' %>	
+<div class="container" style="padding-top: 3%; padding-bottom: 3%;">
+<div class="col-12">
+
+	<div class="btn-group margin-bot2">
+		  <button type="button" class="btn btn-primary">Select Records From:</button>
+		  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <span class="caret"></span>
+		    <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu">
+		 
+		 <li><%= link_to "2014-15", p_type_graph_yearwise_path(:passed_date => "2014-15"),type: 'hidden' %></li>
+		 <li><%= link_to "2015-16", p_type_graph_yearwise_path(:passed_date => "2015-16"),type: 'hidden' %></li>
+		 <li><%= link_to "2016-17", p_type_graph_yearwise_path(:passed_date => "2016-17"),type: 'hidden' %></li>
+		 <li><%= link_to "2017-18", p_type_graph_yearwise_path(:passed_date => "2017-18"),type: 'hidden' %></li>
+		 <li><%= link_to "2018-19", p_type_graph_yearwise_path(:passed_date => "2018-19"),type: 'hidden' %></li>
+		 <li><%= link_to "2019-20", p_type_graph_yearwise_path(:passed_date => "2019-20"),type: 'hidden' %></li>
+		 <li><%= link_to "2020-21", p_type_graph_yearwise_path(:passed_date => "2020-21"),type: 'hidden' %></li>	
+
+		  </ul>
+		</div>
+	<div class="row">
+		<div class="col-md-6"  style="padding: 3%;">
+		<div class="box-graph">
+		<h4><b>No of Applications(Proposal Type Wise.)</b></h4>
+		
+				<%= pie_chart [["Attending Workshop",@attending_workshop.size],["Organizing Event",@organizing_event.size],["Organizing Workshop",@organizing_workshop.size],["Research Assistantship",@research_assistantship.size],["GATE Reg/Coaching",@gate_reg.size],["Organizing short term training programme for students",@organizing_training_program.size],["Industrial visits",@industrial_visits.size],["Attending Internship",@attending_internship.size],["Inviting Industry",@inviting_industry.size],["Training for campus job interviews",@campus_training.size],["Publication of Research papers",@research_publication.size],["Patenting of research products",@patenting.size],["Delivering expert lectures",@delivering_lectures.size],["Project Funding",@project_funding.size],["Seed Grant",@seed_grant.size],["Qualification Upgradation",@qualification_upgradation.size]] %>
+
+				<% size = @attending_workshop.size + @organizing_event.size + @organizing_workshop.size + @research_assistantship.size + @gate_reg.size + @organizing_training_program.size + @industrial_visits.size + @attending_internship.size + @inviting_industry.size + @campus_training.size + @research_publication.size + @patenting.size + @delivering_lectures.size + @project_funding.size + @seed_grant.size + @qualification_upgradation.size %>
+			<br/>
+			<p><b>Total no. of applications: <%= size %></b></p>
+		</div>
+		</div>
+		
+
+		<div class="col-md-6"  style="padding: 3%;">
+		<div class="box-graph">
+		<h4><b>Sanctioned Amount(Proposal Type Wise.)</b></h4>
+			
+				<%= pie_chart [["Attending Workshop",@attending_workshop_amount],["Organizing Event",@organizing_event_amount],["Organizing Workshop",@organizing_workshop_amount],["Research Assistantship",@research_assistantship_amount],["GATE Reg/Coaching",@gate_reg_amount],["Organizing short term training programme for students",@organizing_training_program_amount],["Industrial visits",@industrial_visits_amount],["Attending Internship",@attending_internship_amount],["Inviting Industry",@inviting_industry_amount],["Training for campus job interviews",@campus_training_amount],["Publication of Research papers",@research_publication_amount],["Patenting of research products",@patenting_amount],["Delivering expert lectures",@delivering_lectures_amount],["Project Funding",@project_funding_amount],["Seed Grant",@seed_grant_amount],["Qualification Upgradation",@qualification_upgradation.size]] %>
+				<% @total_sanctioned_amount = @attending_workshop_amount + @organizing_event_amount + @organizing_workshop_amount + @research_assistantship_amount + @gate_reg_amount + @organizing_training_program_amount + @industrial_visits_amount + @attending_internship_amount + @inviting_industry_amount + @campus_training_amount + @research_publication_amount + @patenting_amount + @delivering_lectures_amount + @project_funding_amount + @seed_grant_amount + @qualification_upgradation_amount %>
+			<br/>
+			<p><b>Total Amount Sanctioned so far is: <%= @total_sanctioned_amount %></b></p>
+		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6"  style="padding: 3%;">
+		<div class="box-graph"> 
+		<h4><b>No. Of Applications (Year Wise.)</b></h4>
+		
+				<%= pie_chart [["First Year",@First_year_proposals.size],["Second Year",@Second_year_proposals.size],["Third Year",@Third_year_proposals.size],["B.TECH",@Fourth_year_proposals.size],["M.TECH First Year",@MTech_First_year_proposals.size],["M.TECH Second Year",@MTech_Second_year_proposals.size]] %>
+				<% size_2 = @First_year_proposals.size + @Second_year_proposals.size + @Third_year_proposals.size + @Fourth_year_proposals.size + @MTech_First_year_proposals.size + @MTech_Second_year_proposals.size %>
+			<br/>
+			<p><b>Total no. of applications: <%= size_2 %></b></p>
+		</div>
+		</div>
+		
+
+		<div class="col-md-6"  style="padding: 3%;">
+		<div class="box-graph">
+		<h4><b>Sanctioned Amount(Year wise.)</b></h4>
+			
+			<%= pie_chart [["First Year",@First_year_proposals_amount],["Second Year",@Second_year_proposals_amount],["Third Year",@Third_year_proposals_amount],["B.TECH",@Fourth_year_proposals_amount],["M.TECH First Year",@MTech_First_year_proposals_amount],["M.TECH Second Year",@MTech_Second_year_proposals_amount]] %>
+			<% @total_sanctioned_amount_2 = @First_year_proposals_amount + @Second_year_proposals_amount + @Third_year_proposals_amount + @Fourth_year_proposals_amount + @MTech_First_year_proposals_amount + @MTech_Second_year_proposals_amount %>
+			<br/>
+			<p><b>Total Amount Sanctioned so far is: <%= @total_sanctioned_amount_2 %></b></p>
+		</div>
+		</div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,38 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3 col-md-offset-1">
+			<h2 class="my-text3">Proposals</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Put forth an application for an activity.<br>Specify your demands for covering your costs.<br>We'll help as much as we can.</p>
+			<br/>
+		</div>
+		<div class="col-md-6 col-md-offset-1">
+			<h2 class="my-text" align="center">New Proposal</h2>
+			<hr style="border-color: grey;">
+			<div class="box-prop">
+						<% if user_signed_in? && (current_user.user_type == "Student" || current_user.user_type == "Admin" || current_user.user_type == "Teacher") %>
+	<%= simple_form_for @proposal do |f| %>
+		<%= f.input :title, label: "Title" %>
+		<br>
+		<h4>Project Funding</h4>
+		<br>
+		<div class="hidden">
+		<%= f.input :proposal_type, :input_html => { :value => 'Project Funding' } %>
+		<%= f.input :project_fee, label: "Project Fee" %>
+		<%= f.input :desc ,label: "Description" %>
+		<%= f.input :others_reason ,label: "Other(if any)" %>
+		<%= f.input :others_fees ,label: "Other fees" %>
+		<%= f.input :expectations,label: "Expectations from the activity" %>
+		<%= f.submit "Apply" , class: "btn btn-block btn-warning" %>
+	<% end %>
+<% else %>
+ <p><% if user_signed_in? && current_user.user_type != nil %> You are user of type <%= current_user.user_type %>,
+ thus you can't submit this application.<% end %> Access Denied </p>
+<% end %>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

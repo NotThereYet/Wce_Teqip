@@ -1,0 +1,64 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Activities</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Explore Events around you. Be up to date with activities and events that'll present you with opportunities to develop yourself. Don't worry, we are TEQIP, we will pay.</p>
+			<br/>
+		</div>
+		<div class="col-md-5">
+			<h2 class="my-text3">Edit Activity</h2>
+			<hr style="border-color: #dc3d24;">
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<%= simple_form_for @activity do |f| %>
+					<%= f.error_notification %>
+					<div class="form-inputs">
+						<%= f.input :title, label: "Title" %>
+						<%= f.input :desc,label: "Description" %>
+						<%= f.input :event_date , label: "Event Date" %>
+						<%= f.file_field :attachment ,label: "Attachment" %>
+					</div>
+					<div class="form-actions">
+						<%= f.submit "Update activity", class: "btn btn-md btn-success" %>
+					</div>
+					<% end %>
+				<% else%>
+						<h2>Access Denied,you cant Edit acticities Unless you are an Admin</h2>
+				<% end %>
+			<% else %>
+				<h2>Login to Add Activities</h2>
+			<% end %>
+		</div>
+		<div class="col-md-4">
+			<h2 class="my-text3">Upcoming Activities</h2>
+			<hr style="border-color: grey;">
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<p><%= link_to "Add Activity",new_activity_path,class: "btn btn-sm btn-success" %></p>
+				<% end %>
+			<% end %>
+			<% if @upcoming_activities.size > 0 %>
+					<% for upc in @upcoming_activities %>
+						<p class="my-text"><%= link_to upc.title,activity_path(upc) , style: "color: black; font-size: 18px;"%></p>	
+					<% end %>
+				<% else %>
+				<p>No upcoming events added yet</p>
+				<% end %>
+					<hr>
+				<h2 class="my-text3">Past Activities</h2>
+				<hr style="border-color: grey;">
+			<% if @past_activities.size > 0 %>
+						<% for past_a in @past_activities %>
+							<p class="my-text"><%= link_to past_a.title ,activity_path(past_a), style: "color: black; font-size: 18px;"%></p>
+						<% end %>
+					<% else %>
+					<p>No completed Events in Database Yet</p>
+				<% end %>
+
+		</div>
+	</div>
+	</div>
+</div>

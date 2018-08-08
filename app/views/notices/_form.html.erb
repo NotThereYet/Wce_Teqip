@@ -1,0 +1,11 @@
+<%= simple_form_for @notice do |f| %>
+<%= f.error_notification %>
+<div class="form-inputs">
+	<%= f.input :title, label: "Title",placeholder: "Add a title to this notice" %>
+	<%= f.input :desc,label: "Description", placeholder: "What is this notice about" %>
+</div>
+<div class="form-actions">
+		<%= f.submit "Create", class: "btn btn-md btn-success" %>
+</div>
+</div>
+<% end %>

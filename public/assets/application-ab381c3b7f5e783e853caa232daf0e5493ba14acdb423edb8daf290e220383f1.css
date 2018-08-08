@@ -1,0 +1,165 @@
+/* line 1, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/devise-bootstrap-views-0.0.11/app/assets/stylesheets/devise_bootstrap_views.scss */
+.float-none {
+  float: none;
+}
+
+/* line 5, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/devise-bootstrap-views-0.0.11/app/assets/stylesheets/devise_bootstrap_views.scss */
+.panel-heading {
+  padding: 15px;
+}
+/* line 7, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/devise-bootstrap-views-0.0.11/app/assets/stylesheets/devise_bootstrap_views.scss */
+.panel-heading h4 {
+  margin: 0px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+.bg {
+    background-image: url("BG.jpg");
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.box-title {
+	border: 1px solid #b7b1a0;
+	background-color: #b7b1a0;
+	color: #25303f;
+	border-radius: 2px;
+	padding: 2%;
+	width: 100%;
+}
+
+.margin-main-div {
+	margin-left: 5%;
+	margin-right: 5%;
+	padding: 0%;
+}
+
+.box-form {
+	border: solid;
+	border-color: black;
+	width: 100%;
+	height: 100%;
+	padding: 2%;
+}
+
+.profile-bg {
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	background-color: #d4d6d8;
+	padding: 3%;
+	border-radius: 5%;
+	box-shadow: 10px 10px 10px #888888;
+
+}
+
+.img2{
+	width: 100%;
+	height: 90%;
+	border-radius: none;
+}
+
+@media (min-width: 501px) and (max-width: 768px){
+  .image-responsive-logo{
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media (max-width: 500px){
+  .image-responsive-logo{
+    height: 50px;
+    width: 50px;
+  }
+}
+@media (min-width: 769px) and (max-width: 992px){
+  .image-responsive-logo{
+    height: 100%
+
+  }
+}
+
+.margin-logo {
+	margin-top: 15px;
+}
+
+.link-options a{
+	background: none;
+	color: blue;
+	text-decoration: none;
+}
+.link-options a:hover{
+	background: none;
+	color: black;
+	text-decoration: underline;
+	text-shadow: 10%;
+}
+
+.btn-blue {
+	background-color: #cd5360;
+	color: white;
+	font-family: 'Muli', sans-serif;
+	font-weight: 300;
+	font-size: 100%;
+	border-radius: 0%;
+	padding: 8px;
+	margin: 0;
+	&:hover {
+		color: white;
+		transition: 0.5s;
+		background-color: #3b5998;
+		text-decoration: none;
+	}
+}
+.btn-blue:hover {
+	color: white;
+		transition: 0.3s;
+		background-color: #3b5998;
+		text-decoration: none;
+}
+
+.limit-panel {
+    height: 400px; 
+    margin: 0px;
+    overflow-y: auto;
+}
+
+.btn-course {
+	background-color: grey;
+	color: white;
+	font-family: 'Muli', sans-serif;
+	font-weight: 300;
+	font-size: 100%;
+	border-radius: 0%;
+	padding: 10px 20px;
+	&:hover {
+		color: #383838;
+		transition: 0.5s;
+		background-color: #fff;
+		text-decoration: none;
+	}
+}
+.btn-course:hover {
+	color: #383838;
+		transition: 0.5s;
+		background-color: #fff;
+		text-decoration: none;
+		border: 1px solid grey;
+}

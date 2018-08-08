@@ -1,0 +1,51 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Notices</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Be Notified! The notices here are Important. Change in event dates, notices about recent changes in TEQIP's rules,all could be found here. Make sure you check this every time you visit this portal, who knows what could change and what could go wrong.</p>
+			<br/>
+		</div>
+		<div class="col-md-6">
+			<h2 class="my-text3">Edit Notice</h2>
+			<hr style="border-color: #dc3d24;">
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<%= simple_form_for @notice do |f| %>
+			<%= f.error_notification %>
+			<div class="form-inputs">
+				<%= f.input :title, label: "Title",placeholder: "Add a title to this notice" %>
+				<%= f.input :desc,label: "Description", placeholder: "What is this notice about" %>
+			</div>
+			<div class="form-actions">
+					<%= f.submit "Update", class: "btn btn-md btn-success" %>
+			</div>
+			<% end %>
+				<% else%>
+					<h2>Access Denied,you cant Edit notice Unless you are an Admin</h2>
+				<% end %>
+			<% else %>
+				<h2>Login to Add Notice</h2>
+			<% end %>
+		</div>
+		<div class="col-md-3">
+			<h2 class="my-text3">Notices</h2>
+			<hr style="border-color: grey;">
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<p><%= link_to "Add Notice",new_notice_path,class: "btn btn-sm btn-success" %></p>
+				<% end %>
+			<% end %>
+			<% if @notices.size > 0 %>
+				<% for notice in @notices %>
+					<p class="my-text"><%= link_to notice.title,notice_path(notice) , style: "color: black; font-size: 18px;"%></p>
+				<% end %>
+			<% else %>
+		 		<p>No notices to display</p>
+			<% end %>
+		</div>
+	</div>
+</div>
+</div>

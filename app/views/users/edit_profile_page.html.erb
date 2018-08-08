@@ -1,0 +1,42 @@
+<%= render 'partials/navbarhome' %>
+<% if current_user.user_type == "Student" %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-6"></div>
+		<div class="col-md-5" style="padding: 3%">
+			<%= simple_form_for @studet do |f|%>
+			
+				<tr><td><b class="my-text3">Year</b></td><td><%=f.input :year,collection: [:First,:Second,:Third,:Fourth,:MTech_First,:MTech_Second] , label: false %></td></tr>
+				<tr><td><b class="my-text3">Branch</b></td><td><%=f.input :branch,collection: [:CSE,:Mechanical,:Electronics,:Electrical,:Civil,:IT] , label: false %></td></tr>
+				<tr><td><b class="my-text3">Gender</b></td><td><%=f.input :dob , label: false %></td></tr>
+				<tr><td><b class="my-text3">Gender</b></td><td><%=f.input :gender,collection: [:Male,:Female,:Others], label: false %></td></tr>
+				<tr><td><b class="my-text3">Contact</b></td><td><%=f.input :contact_no , placeholder: "Enter Your Phone Number" , label: false %></td></tr>
+				<tr><td><b class="my-text3">Address</b></td><td><%=f.input :address ,placeholder: "Enter Your address" , label: false %></td></tr>
+				<hr style="border-color: #dc3d24;">
+				<%= f.submit "Update" , class: "btn btn-md btn-warning"%>
+	<% end %>
+		</div>
+	</div>
+	</div>
+</div>
+<% elsif current_user.user_type == "Teacher" %>
+	<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-6"></div>
+		<div class="col-md-5" style="padding: 3%">
+			<%= simple_form_for @profdet do |f|%>
+			
+				<tr><td><b class="my-text3">Branch</b></td><td><%=f.input :branch,collection: [:CSE,:Mechanical,:Electronics,:Electrical,:Civil,:IT] , label: false %></td></tr>
+				<tr><td><b class="my-text3">Gender</b></td><td><%=f.input :gender,collection: [:Male,:Female,:Others], label: false %></td></tr>
+				<tr><td><b class="my-text3">Contact</b></td><td><%=f.input :contact_no , placeholder: "Enter Your Phone Number" , label: false %></td></tr>
+				<tr><td><b class="my-text3">Address</b></td><td><%=f.input :address ,placeholder: "Enter Your address" , label: false %></td></tr>
+				<hr style="border-color: #dc3d24;">
+				<%= f.submit "Update" , class: "btn btn-md btn-warning"%>
+		<% end %>
+		</div>
+	</div>
+	</div>
+</div>
+<% end %>

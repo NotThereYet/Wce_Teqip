@@ -1,0 +1,13 @@
+<div class="col-xs-6 col-xs-offset-3">
+	<div class="row profile-bg">
+	<h2>My Profile</h2>
+	<hr>
+	<%= simple_form_for @profdetail do |f|%>
+		<%=f.input :branch,collection: [:CSE,:Mechanical,:Electronics,:Electrical,:Civil,:IT] ,label: "Branch" %>
+		<%=f.input :gender,collection: [:Male,:Female,:Others] ,label: "Gender"%>
+		<%=f.input :contact_no ,label: "Contact No." ,placeholder: "Enter Your Phone Number" %>
+		<%=f.input :address ,label: "Address" ,placeholder: "Enter Your address" %>
+		<%= f.submit "Save" , class: "btn btn-md btn-success"%>
+	<% end %>
+	</div>
+</div>

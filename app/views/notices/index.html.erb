@@ -1,0 +1,42 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Notices</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Be Notified! The notices here are Important. Change in event dates, notices about recent changes in TEQIP's rules,all could be found here. Make sure you check this every time you visit this portal, who knows what could change and what could go wrong.</p>
+			<br/>
+		</div>
+		<div class="col-md-6">
+			<h2 class="my-text3"><%= @notice.title %></h2>
+			<hr style="border-color: #dc3d24;">
+			<h4 class="my-text"><%= @notice.desc %></h4>
+			
+			<% if user_signed_in? %>
+			<% if current_user.user_type == "Admin" %>
+				<hr style="border-color: grey;">
+			    <%= link_to "Edit Notice",edit_notice_path(@notice),class: "btn btn-sm btn-warning" %>
+				<%= link_to "Delete", notice_path(@notice),method: :delete,data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
+			<% end %>
+		<% end %>
+		</div>
+		<div class="col-md-3">
+			<h2 class="my-text3">Notices</h2>
+			<hr style="border-color: grey;">
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<p><%= link_to "Add Notice",new_notice_path,class: "btn btn-sm btn-success" %></p>
+				<% end %>
+			<% end %>
+			<% if @notices.size > 0 %>
+				<% for notice in @notices %>
+					<p class="my-text"><%= link_to notice.title,notice_path(notice) , style: "color: black; font-size: 18px;"%></p>
+				<% end %>
+			<% else %>
+		 		<p>No notices to display</p>
+			<% end %>
+		</div>
+	</div>
+</div>
+</div>

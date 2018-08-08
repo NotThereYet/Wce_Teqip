@@ -1,0 +1,63 @@
+<!-- header -->
+<header class="header">
+	<div class="container">
+		<div class="header__logo"><a href="homepage"><%= image_tag('logo.png') %></a></div>
+		<!-- consult-nav -->
+		<nav class="consult-nav">
+			<!-- consult-menu -->
+			<ul class="consult-menu">
+				<li><%= link_to "Home",homepage_path %>
+				</li>
+				<li><%= link_to  "Directors", directors_desk_path %></li>
+			    <li><%= link_to "TEQIP III", guidelines_path %></li>
+			    <li><%= link_to "NPIU",perf_a_report_path %></li>
+				<li class="menu-item-has-children"><%= link_to "Statistics",statistics_path %>
+					<ul class="sub-menu">
+						<li><%= link_to "Departmantwise",statistics_path %></li>
+						<li><%= link_to "Yearwise",statistics_path %></li>
+						<li><%= link_to "Faculty/Student",statistics_path %></li>
+					</ul>
+				</li>
+				<!--<li class="menu-item-has-children"><a href="project.html">project</a>
+					<ul class="sub-menu">
+						<li><a href="project-detail.html">Project detail</a>
+						</li>
+					</ul>
+				</li> -->
+				<% if user_signed_in? && (current_user.user_type == "Director" || current_user.user_type == "Deputy_director" || current_user.user_type == "HOD_CSE" || current_user.user_type == "HOD_IT"|| current_user.user_type == "HOD_Civil"|| current_user.user_type == "HOD_Mechanical"|| current_user.user_type == "HOD_Electrical"|| current_user.user_type == "HOD_Electronics"|| current_user.user_type == "Admin")%>
+      				<li class="menu-item-has-children current-menu-item"><%= link_to "Proposal SUmmary", summary_page_path(current_user) %>
+						<ul class="sub-menu">
+							<li><%= link_to "Approved",approved_proposals_path %></li>
+							<li><%= link_to "Bill-Submitted",bill_sub_proposals_path %></li>
+							<li><%= link_to "Sanctioned",sanctioned_proposals_path %></li>
+							<li><%= link_to "Debited",debited_proposals_path %></li>
+						</ul>
+					</li></li>
+      			<% end %>
+
+      			<% if user_signed_in? && current_user.user_type != "Admin" %>
+			      	<li><%= link_to "My Proposal",proposals_path(current_user) %></li>
+			    <% end %>
+				<% unless user_signed_in? %>
+				    <li class="menu-item-has-children"><a href="#" class="glyphicon glyphicon-chevron-down" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span></span></a>
+						<ul class="sub-menu">
+							<li><%= link_to "Login",new_user_session_path %></li>
+	             			<li><%= link_to "Sign up", new_registration_path(resource_name) %></li>
+						</ul>
+					</li>
+				<%else %>
+				 	<li class="menu-item-has-children"><a href="#" class="glyphicon glyphicon-chevron-down" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span></span></a>
+				 		<ul class="sub-menu">
+				 			<li><%= link_to "Logout",destroy_user_session_path ,method: :delete %></li>
+          					<% if current_user.user_type == "Student" %>
+            					<li><%= link_to "Profile",profile_page_path(passed_user: current_user) %></li>
+          					<% end %>
+				 		</ul>
+				 	</li>
+				<% end %>
+			</ul><!-- consult-menu -->
+			<div class="navbar-toggle"><span></span><span></span><span></span></div>
+		</nav><!-- End / consult-nav -->
+		
+	</div>
+</header><!-- End / header -->

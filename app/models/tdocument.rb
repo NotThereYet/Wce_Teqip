@@ -1,0 +1,2 @@
+class Tdocument < ApplicationRecord
+end

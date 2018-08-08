@@ -1,0 +1,2 @@
+class Profdetail < ApplicationRecord
+end

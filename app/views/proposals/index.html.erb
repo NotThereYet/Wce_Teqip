@@ -1,0 +1,97 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Proposals</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Put forth an application for an activity.<br>Specify your demands for covering your costs.<br>We'll help as much as we can.</p>
+			<br/>
+			<div class="btn-group margin-bot2">
+			  <button type="button" class="btn btn-primary">Add Proposal</button>
+			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <span class="caret"></span>
+			    <span class="sr-only">Toggle Dropdown</span>
+			  </button>
+			  <ul class="dropdown-menu">
+			 <% if user_signed_in? && current_user.user_type == "Student" %>
+				 <li><%= link_to "Attending Workshop", attending_workshop_path %></li>
+				 <li><%= link_to "Organizing Event", organizing_event_path %></li> 
+				 <li><%= link_to "Organizing workshop", organizing_workshop_path %></li> 
+				 <li><%= link_to "Research Assistantship", research_assistantship_path %></li> 
+				 <li><%= link_to "GATE Reg/Coaching", gate_reg_path %></li>  
+				 <li><%= link_to "Attending Internship", attending_internship_path %></li> 
+				 <li><%= link_to "Publication of research papers", research_publication_path %></li> 
+				 <li><%= link_to "Patenting of research products", patenting_path %></li>  
+				 <li><%= link_to "Project Funding", project_funding_path %></li> 
+				 <li><%= link_to "Seed Grant", seed_grant_path %></li> 
+
+			 <% elsif user_signed_in? && current_user.user_type == "Teacher"  %>
+				 <li><%= link_to "Organizing Event", organizing_event_path %></li> 
+				 <li><%= link_to "Organizing workshop", organizing_workshop_path %></li>
+				 <li><%= link_to "Industrial visits", industrial_visits_path %></li> 	
+				 <li><%= link_to "Publication of research papers", research_publication_path %></li> 
+				 <li><%= link_to "Patenting of research products", patenting_path %></li> 
+				 <li><%= link_to "Delivering expert lectures in the project institutions", delivering_lectures_path %></li> 
+				 <li><%= link_to "Project Funding", project_funding_path %></li> 
+				 <li><%= link_to "Seed Grant", seed_grant_path %></li> 
+				 <li><%= link_to "Qualification Upgradation", qualification_upgradation_path %></li> 
+			 <% elsif user_signed_in? && current_user.user_type == "Admin"  %>
+			 	 <li><%= link_to "Attending Workshop", attending_workshop_path %></li>
+				 <li><%= link_to "Organizing Event", organizing_event_path %></li> 
+				 <li><%= link_to "Organizing workshop", organizing_workshop_path %></li> 
+				 <li><%= link_to "Research Assistantship", research_assistantship_path %></li> 
+				 <li><%= link_to "GATE Reg/Coaching", gate_reg_path %></li> 
+				 <li><%= link_to "Organizing short term training programme for students", organizing_training_program_path %></li> 
+				 <li><%= link_to "Industrial visits", industrial_visits_path %></li> 
+				 <li><%= link_to "Attending Internship", attending_internship_path %></li> 
+				 <li><%= link_to "Inviting Industry", inviting_industry_path %></li> 
+				 <li><%= link_to "Training for campus job interviews", campus_training_path %></li> 
+				 <li><%= link_to "Publication of research papers", research_publication_path %></li> 
+				 <li><%= link_to "Patenting of research products", patenting_path %></li> 
+				 <li><%= link_to "Delivering expert lectures in the project institutions", delivering_lectures_path %></li> 
+				 <li><%= link_to "Project Funding", project_funding_path %></li> 
+				 <li><%= link_to "Seed Grant", seed_grant_path %></li> 
+				 <li><%= link_to "Qualification Upgradation", qualification_upgradation_path %></li> 	
+			 <% end %>
+
+			  </ul>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<h2 class="my-text3">My Proposals</h2>
+			<hr style="border-color: grey;">
+
+			<% if @proposals.size > 0 %>
+			<% count = 1 %>
+			<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<col width="75">
+				<col width="300">
+				<col width="100">
+				<col width="100">
+				<thead>
+					<th>Sr.No</th>
+					<th>Proposal</th>
+					<th>Approval</th>
+					<th>Sanction</th>
+				</thead>
+				<tbody>
+				<% for proposal in @proposals %>
+						<tr><td><%= count %></td>
+						<td><%= link_to proposal.title, proposal_path(proposal) %></td>
+						<td><%= proposal.approved %></td>
+						<td><%= proposal.sanctioned %></td></tr>
+					
+					<% count=count+1 %>
+				<% end %>
+				</tbody>
+			</table>
+			</div>		
+		<% else %>
+			<h4>You haven't applied for any scheme yet!</h4>
+		<% end %>
+		</div>
+	</div>
+	</div>
+</div>

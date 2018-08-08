@@ -1,0 +1,57 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Proposals</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<br/>
+		</div>
+		<div class="col-md-8 col-md-offset-1">
+			<h2 class="my-text3" align="right">Approved Proposals</h2>
+			<hr style="border-color: grey;">
+			<% if user_signed_in? && (current_user.user_type == "Director" || current_user.user_type == "Deputy_director" || current_user.user_type == "HOD_CSE" || current_user.user_type == "HOD_IT"|| current_user.user_type == "HOD_Civil"|| current_user.user_type == "HOD_Mechanical"|| current_user.user_type == "HOD_Electrical"|| current_user.user_type == "HOD_Electronics"|| current_user.user_type == "Admin") %>
+				<% if @proposals.size > 0 %>
+					<% count = 1 %>
+					<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+					
+						<thead>
+							<tr><th>Sr.No</th>
+							<th>Proposal</th>
+							<th>Proposer</th>
+							<th>Student/Faculty</th>
+							<th>Approval</th>
+							<th>Sanction</th></tr>
+						</thead>
+						<tbody style="text-align: center;">
+							<% for proposal in @proposals %>
+								<tr>
+									<td><%= count %></td>
+									<td><%= link_to proposal.title, proposal_path(proposal) %></td>
+									<td><%= proposal.proposer_name %></td>
+									<td><% if proposal.proposer_type == "Student" %>
+										Student
+									<% else %>
+										Faculty
+									<% end %>
+									</td>
+									<td><%= proposal.approved %></td>
+									<td><%= proposal.sanctioned %></td>
+								</tr>
+								<% count = count + 1 %>
+							<% end %>
+						</tbody>
+					</table>
+					</div>		
+				<%else%>
+					No proposals have been added yet in the system.
+				<% end %>
+			<% else %>
+				Access Denied
+			<% end %>
+		</div>
+	</div>
+	</div>
+</div>

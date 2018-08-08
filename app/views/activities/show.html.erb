@@ -1,0 +1,64 @@
+
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Activities</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Explore Events around you. Be up to date with activities and events that'll present you with opportunities to develop yourself. Don't worry, we are TEQIP, we will pay.</p>
+			<br/>
+		</div>
+		<div class="col-md-5">
+			<h2 class="my-text3"><%= @activity.title %></h2>
+			<hr style="border-color: #dc3d24;">
+			<h4 class="my-text"><%= @activity.desc %></h4>
+			<h4 class="my-text">Event Date: <%= @activity.event_date %></h4>
+
+			<hr>
+			<% if @activity.event_date > Date.today %>
+				<% if user_signed_in? && current_user.user_type != "Admin"%>
+					<%= link_to "Apply",new_proposal_path(passed_title: @activity.title,passed_proposer_type: current_user.user_type) ,class: "btn btn-sm btn-info" %>
+				<% else %>
+					<h4 class="my-text">Login to add proposal for this activity and apply so as to benefit from this scheme</h4>
+				<% end %>
+			<% else %>
+				<h4 class="my-text">Activity already concluded</h4>
+			<% end %>
+
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<%= link_to "Edit",edit_activity_path(@activity),class: "btn btn-sm btn-warning" %>
+					<%= link_to "Delete", activity_path(@activity),method: :delete,data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="col-md-4">
+			<h2 class="my-text3">Upcoming Activities</h2>
+			<hr style="border-color: grey;">
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Admin" %>
+					<p><%= link_to "Add Activity",new_activity_path,class: "btn btn-sm btn-success" %></p>
+				<% end %>
+			<% end %>
+			<% if @upcoming_activities.size > 0 %>
+					<% for upc in @upcoming_activities %>
+						<p class="my-text"><%= link_to upc.title,activity_path(upc) , style: "color: black; font-size: 18px;"%></p>	
+					<% end %>
+				<% else %>
+				<p>No upcoming events added yet</p>
+			<% end %>
+				<hr>
+				<h2 class="my-text3">Past Activities</h2>
+				<hr style="border-color: grey;">
+			<% if @past_activities.size > 0 %>
+						<% for past_a in @past_activities %>
+							<p class="my-text"><%= link_to past_a.title ,activity_path(past_a), style: "color: black; font-size: 18px;"%></p>
+						<% end %>
+					<% else %>
+					<p>No completed Events in Database Yet</p>
+				<% end %>
+		</div>
+		</div>
+	</div>
+</div>

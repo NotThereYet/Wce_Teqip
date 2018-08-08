@@ -1,0 +1,45 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 3%; padding-bottom: 3%;">
+<div class="col-12">
+
+	<div class="btn-group margin-bot2">
+		  <button type="button" class="btn btn-primary">Select Records From:</button>
+		  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <span class="caret"></span>
+		    <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu">
+		 
+		 <li><%= link_to "2014-15", statistics_yearwise_path(:passed_date => "2014-15"),type: 'hidden' %></li>
+		 <li><%= link_to "2015-16", statistics_yearwise_path(:passed_date => "2015-16"),type: 'hidden' %></li>
+		 <li><%= link_to "2016-17", statistics_yearwise_path(:passed_date => "2016-17"),type: 'hidden' %></li>
+		 <li><%= link_to "2017-18", statistics_yearwise_path(:passed_date => "2017-18"),type: 'hidden' %></li>
+		 <li><%= link_to "2018-19", statistics_yearwise_path(:passed_date => "2018-19"),type: 'hidden' %></li>
+		 <li><%= link_to "2019-20", statistics_yearwise_path(:passed_date => "2019-20"),type: 'hidden' %></li>
+		 <li><%= link_to "2020-21", statistics_yearwise_path(:passed_date => "2020-21"),type: 'hidden' %></li>	
+
+		  </ul>
+		</div>
+	<div class="row">
+		<div class="col-md-6"  style="padding: 3%;">
+		<div class="box-graph"> 
+		<h4><b>No of Applications(Department wise)</b></h4>
+		
+			<%= pie_chart [["CSE",@count_cse],["IT",@count_it],["ELECTRICAL",@count_ele],["ELECTRONICS",@count_eln],["CIVIL",@count_civ],["MECHANICAL",@count_mech]] %>
+			<br/>
+			<p><b>Total number of applications submitted:<%= @proposals.size %></b></p>
+		</div>
+		</div>
+
+		<div class="col-md-6"  style="padding: 3%;">
+		<div class="box-graph">
+		<h4><b>Sanctioned Amount(Department wise)</b></h4>
+			
+			<%= pie_chart [["CSE",@funds_cse],["IT",@funds_it],["ELECTRICAL",@funds_ele],["ELECTRONICS",@funds_eln],["CIVIL",@funds_civ],["MECHANICAL",@funds_mech]] %>
+			<br/>
+			<p><b>Total Amount Sanctioned so far is: <%= @total_sanctioned_amount %></b></p>
+		</div>
+		</div>
+	</div>
+</div>
+</div>

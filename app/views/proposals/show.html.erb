@@ -1,0 +1,255 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+	<div class="col-12">	
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="my-text3">Proposals</h2>
+			<hr style="border-color: grey;">
+			<p class="my-text">Put forth an application for an activity.<br>Specify your demands for covering your costs.<br>We'll help as much as we can.</p>
+			<br/>
+		</div>
+		<div class="col-md-8 col-md-offset-1">
+			<% if @proposal != nil %>
+				<h2 class="my-text3"><%= @proposal.title %></h2>
+				<hr style="border-color: grey;">
+				<div class="box-prop">
+					<% if (user_signed_in? && (current_user.user_type == "Director" || current_user.user_type == "Deputy_director" || current_user.user_type == "HOD_CSE" || current_user.user_type == "HOD_IT"|| current_user.user_type == "HOD_Civil"|| current_user.user_type == "HOD_Mechanical"|| current_user.user_type == "HOD_Electrical"|| current_user.user_type == "HOD_Electronics"|| current_user.user_type == "Admin" )) ||  @proposal.user_id == current_user.id %>
+						<% if @proposal.user_id == current_user.id && @proposal.cancelled == "Yes" %>
+							<p><b>You've cancelled this proposal. To delete <%= link_to "click here", proposal_path(@proposal), method: :delete %> </b></p>
+						<% end %>
+						<% if current_user.user_type != "Admin" && @proposal.user_id == current_user.id %>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<tr><td><b>Name:</b></td><td><%= @proposal.proposer_name %></td></tr>
+									<tr><td><b>User:</b></td><td><%= @proposal.proposer_type %></td></tr>
+									<tr><td><b>Proposal:</b></td><td><%= @proposal.title %></td></tr>
+									<tr><td><b>Description:</b></td><td><%= @proposal.desc%></td></tr>
+									<tr><td><b>Start Date:</b></td>
+										<td>
+										<% if @proposal.start_date == @proposal.end_date %>
+											N.A.
+										<% else %>
+											<%= @proposal.start_date  %>
+										<% end %>
+										</td>
+									</tr>
+									<tr><td><b>End Date:</b></td>
+										<td>
+										<% if @proposal.start_date == @proposal.end_date %>
+											N.A.
+										<% else %>
+											<%= @proposal.end_date  %>
+										<% end %>	
+										</td>
+									</tr>
+								</table>
+								<table class="table table-bordered table-striped">
+									<thead>
+										<th>Entity</th>
+										<th>Requested Amount</th>
+										<th>Sanctioned Amount</th>
+									</thead>
+									<tbody>
+										<% if @proposal.course_fees > 0 %>
+										<tr><td><b>Course Fees:</b></td><td><%= @proposal.course_fees %></td><td><%= @proposal.course_fees_sanctioned %></td></tr>
+										<% end %>
+
+										<% if @proposal.travel > 0 %>
+										<tr><td><b>Travel Allowances:</b></td><td><%= @proposal.travel  %></td><td><%= @proposal.travel_sanctioned %></td></tr>
+										<% end %>
+
+										<% if @proposal.lodging > 0 %>
+										<tr><td><b>Lodging/Boarding:</b></td><td><%= @proposal.lodging %></td><td><%= @proposal.lodging_sanctioned %></td></tr>
+										<% end %>
+
+										<% if @proposal.sundry > 0 %>
+										<tr><td><b>Sundry:</b> </td><td> <%= @proposal.sundry  %></td><td><%= @proposal.sundry_sanctioned %></td></tr>
+										<% end %>
+
+										<% if @proposal.trainer_fee > 0 %>
+										<tr><td><b>Trainer Fee:</b></td><td><%= @proposal.trainer_fee  %></td><td><%= @proposal.trainer_fee_sanctioned %></td></tr>
+										<% end %>
+
+										<% if @proposal.hospitality > 0 %>
+										<tr><td><b>Hospitality:</b></td><td><%= @proposal.hospitality  %></td><td><%= @proposal.hospitality_sanctioned %></td></tr>
+										<% end %>
+
+										
+										<tr><td><b>Other Expenses:</b></td><td><%= @proposal.others_reason  %></td><td><%= @proposal.others_reason  %></td></tr>
+										
+										<% if @proposal.others_fees > 0 %>
+										<tr><td> <b>Amount(Other Expenses):</b></td><td><%= @proposal.others_fees  %></td><td><%= @proposal.others_fees_sanctioned %></td></tr> 
+										<% end %>
+
+										<% if @proposal.publication_fee > 0 %>
+										<tr><td> <b>Publication Fees:</b></td><td><%= @proposal.publication_fee  %></td><td><%= @proposal.publication_fee_sanctioned %></td></tr> 
+										<% end %>
+
+										<% if @proposal.patenting_fee > 0 %>
+										<tr><td> <b>Patenting Fees:</b></td><td><%= @proposal.patenting_fee  %></td><td><%= @proposal.patenting_fee_sanctioned %></td></tr> 
+										<% end %>
+
+										<% if @proposal.project_fee > 0 %>
+										<tr><td> <b>Project Fees:</b></td><td><%= @proposal.project_fee  %></td><td><%= @proposal.project_fee_sanctioned %></td></tr> 
+										<% end %>
+
+										<% if @proposal.thesis_fee > 0 %>
+										<tr><td> <b>Thesis Fees:</b></td><td><%= @proposal.thesis_fee  %></td><td><%= @proposal.thesis_fee_sanctioned %></td></tr> 
+										<% end %>
+
+										<% if @proposal.consumables_fee > 0 %>
+										<tr><td> <b>Consumables Fees:</b></td><td><%= @proposal.consumables_fee  %></td><td><%= @proposal.consumables_fee_sanctioned %></td></tr> 
+										<% end %>
+
+										<% if @proposal.qualification_fee > 0 %>
+										<tr><td> <b>Qualification Fees:</b></td><td><%= @proposal.qualification_fee  %></td><td><%= @proposal.qualification_fee_sanctioned %></td></tr> 
+										<% end %>
+										
+										<tr><td><b>Total Amount: </b></td><td><%= @proposal.requested_amount %></td><td><%= @proposal.sanctioned_amount %> </td></tr>
+									</tbody>
+								</table>
+							</div>
+							<% if @proposal.approved == "Yes" %>
+								<%if @proposal.attachment? %>
+									<p>You have attached your bills to the application</p>
+									<p><%= link_to "Click Here to View", :action => 'download_pdf', :controller=>"proposals", :id => @proposal.id %></p>
+								<% else %>
+									<p>You need to attach your bills to the application (OR) Sumit hard copy of bills to the office.</p>
+								<% end %>
+								<%= simple_form_for @proposal,wrapper: :inline_form do |f| %>
+									<%= f.input :conclusion,label: "Conclusion of this activity" %>
+									<hr>
+									<% unless @proposal.attachment? %>
+									<p><strong>Upload Bills Pdf</strong></p>
+									<%= f.file_field :attachment ,label: "Upload Document" %>
+									<br>
+									<% end %>
+								<%= f.submit "Save",class: "btn btn-warning" %>
+								<% end %>
+							<% end %>
+						<% end %>
+						<% if current_user.user_type == "Admin" %>
+							<%= simple_form_for @proposal,wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<tr><td><b>Name:</b></td><td><%= @proposal.proposer_name %></td></tr>
+									<tr><td><b>User:</b></td><td><%= @proposal.proposer_type %></td></tr>
+									<tr><td><b>Proposal:</b></td><td><%= @proposal.title %></td></tr>
+									<tr><td><b>Description:</b></td><td><%= @proposal.desc%></td></tr>
+									<tr><td><b>Start Date:</b></td><td> <%= @proposal.start_date  %></td></tr>
+									<tr><td><b>End Date:</b></td><td><%= @proposal.end_date  %></td></tr>
+								</table>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<tr><td><b>Express Fees Sanctioned:</b></td><td><%= f.input :express_fees %></td></tr>
+									<tr><td><b>Express Fees Reason:</b></td><td><%= f.input :express_reason %></td></tr>
+								</table>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<th>Entity</th>
+										<th>Requested Amount</th>
+										<th>Sanctioned Amount</th>
+									</thead>
+									<tbody>
+										<% if @proposal.course_fees > 0 %>
+										<tr><td><b>Course Fees:</b></td><td><%= @proposal.course_fees %></td><td><%= f.input :course_fees_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.travel > 0 %>
+										<tr><td><b>Travel Allowances:</b></td><td><%= @proposal.travel  %></td><td><%= f.input :travel_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.lodging > 0 %>
+										<tr><td><b>Lodging/Boarding:</b></td><td><%= @proposal.lodging %></td><td><%= f.input :lodging_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.sundry > 0 %>
+										<tr><td><b>Sundry:</b> </td><td> <%= @proposal.sundry  %></td><td><%= f.input :sundry_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.trainer_fee > 0 %>
+										<tr><td><b>Trainer Fee:</b></td><td><%= @proposal.trainer_fee  %></td><td><%= f.input :trainer_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.hospitality > 0 %>
+										<tr><td><b>Hospitality:</b></td><td><%= @proposal.hospitality  %></td><td><%= f.input :hospitality_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.consumables_fee > 0 %>
+										<tr><td><b>Consumable Fee:</b></td><td><%= @proposal.consumables_fee  %></td><td><%= f.input :consumables_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.qualification_fee > 0 %>
+										<tr><td><b>Qualification Fee:</b></td><td><%= @proposal.qualification_fee  %></td><td><%= f.input :qualification_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.publication_fee > 0 %>
+										<tr><td><b>Publication Fee:</b></td><td><%= @proposal.publication_fee  %></td><td><%= f.input :publication_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+
+										<% if @proposal.patenting_fee > 0 %>
+										<tr><td><b>Patenting:</b></td><td><%= @proposal.patenting_fee  %></td><td><%= f.input :patenting_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+
+										<% if @proposal.project_fee > 0 %>
+										<tr><td><b>Project Fee:</b></td><td><%= @proposal.project_fee  %></td><td><%= f.input :project_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+
+										<% if @proposal.thesis_fee > 0 %>
+										<tr><td><b>Thesis Fee:</b></td><td><%= @proposal.thesis_fee  %></td><td><%= f.input :thesis_fee_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>										
+										<tr><td><b>Other Expenses:</b></td><td><%= @proposal.others_reason  %></td><td><%= @proposal.others_reason  %></td></tr>
+									
+
+										<% if @proposal.others_fees > 0 %>
+										<tr><td> <b>Amount(Other Expenses):</b></td><td><%= @proposal.others_fees  %></td><td><%= f.input :others_fees_sanctioned,html_input: {class: "align-right"} %></td></tr>
+										<%end%>
+
+										<% if @proposal.requested_amount > 0 %>
+										<tr><td><b>Total Amount: </b></td><td><%= @proposal.requested_amount %></td><td><%= @proposal.sanctioned_amount %> </td></tr>
+										<%end%>
+									</tbody>
+								</table>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<tr><td><b>Approve this application?</b></td>
+									<td><%= f.input :approved , collection: [:Yes, :No],as: :radio_buttons,html_input: {class: "align-left"} %></td></tr>
+									<% if @proposal.approved == "Yes" %>
+										<tr><td><b>Has bills been submitted?</b></td><td><%= f.input :submit_bill ,collection:[:Yes,:No],as: :radio_buttons,html_input: {class: "align-left"} %></td></tr>
+										<tr><td><b>Sanction this application?</b></td><td><%= f.input :sanctioned , collection: [:Yes, :No],as: :radio_buttons,html_input: {class: "align-left"} %></td></tr>
+										<tr><td><b>Has the funds been submitted?</b></td><td><%= f.input :debited_to_acc , collection: [:Yes, :No],as: :radio_buttons,html_input: {class: "align-left"} %></td></tr>
+									<% end %>
+								</table>
+							</div>
+							<%=  f.submit "Update" , class: "btn btn-success float-right" %>
+							<% end %>
+
+							<%if @proposal.attachment? %>
+								<p>Bills have been attached.</p>
+								<p><%= link_to "Click Here to View", :action => 'download_pdf', :controller=>"proposals", :id => @proposal.id %></p>
+							<% else %>
+								<p>Bills are not attached Yet. But they might have submitted to the office.</p>
+							<% end %>
+						<% end %>
+						<hr>
+						<% if @proposal.approved == "No" && @proposal.sanctioned == "No"  && @proposal.user_id == current_user.id %>
+								<% if @proposal.cancelled == "No" %>
+									<%= link_to "Cancel Proposal", cancel_proposal_path(:passed_proposal => @proposal) , class: "btn btn-md btn-danger" %>
+								<% end %>
+						<% end %>
+					<%else%>
+						<h1>Access Denied</h1>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	</div>
+</div>

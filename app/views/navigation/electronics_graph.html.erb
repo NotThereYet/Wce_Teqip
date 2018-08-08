@@ -1,0 +1,46 @@
+<%= render 'partials/navbarhome' %>
+<div class="container" style="padding-top: 3%; padding-bottom: 3%;">
+<div class="col-12">
+
+	<div class="btn-group margin-bot2">
+		  <button type="button" class="btn btn-primary">Select Records From:</button>
+		  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <span class="caret"></span>
+		    <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu">
+		 
+		 <li><%= link_to "2014-15", electronics_graph_yearwise_path(:passed_date => "2014-15"),type: 'hidden' %></li>
+		 <li><%= link_to "2015-16", electronics_graph_yearwise_path(:passed_date => "2015-16"),type: 'hidden' %></li>
+		 <li><%= link_to "2016-17", electronics_graph_yearwise_path(:passed_date => "2016-17"),type: 'hidden' %></li>
+		 <li><%= link_to "2017-18", electronics_graph_yearwise_path(:passed_date => "2017-18"),type: 'hidden' %></li>
+		 <li><%= link_to "2018-19", electronics_graph_yearwise_path(:passed_date => "2018-19"),type: 'hidden' %></li>
+		 <li><%= link_to "2019-20", electronics_graph_yearwise_path(:passed_date => "2019-20"),type: 'hidden' %></li>
+		 <li><%= link_to "2020-21", electronics_graph_yearwise_path(:passed_date => "2020-21"),type: 'hidden' %></li>	
+
+		  </ul>
+		</div>
+	<div class="row">
+		<div class="col-md-6" style="padding: 3%;">
+		<div class="box-graph"> 
+		<h4><b>No of Applications(Year wise:Electronics)</b></h4>
+		
+				<%= pie_chart [["First Year",@first_year.size],["Second Year",@second_year.size],["Third Year",@third_year.size],["B.TECH",@fourth_year.size],["M.TECH First Year",@mtech_first_year.size],["M.TECH Second Year",@mtech_second_year.size]] %>
+				<% size = @first_year.size + @second_year.size + @third_year.size + @fourth_year.size + @mtech_first_year.size + @mtech_second_year.size %>
+			<br/>
+			<p><b>Total no. of applications: <%= size %></b></p>
+		</div>
+		</div>
+		 
+		<div class="col-md-6" style="padding: 3%;">
+		<div class="box-graph">
+		<h4><b>Sanctioned Amount(Year wise:Electronics)</b></h4>
+				<%= pie_chart [["First Year",@first_year_amount],["Second Year",@second_year_amount],["Third Year",@third_year_amount],["B.TECH",@fourth_year_amount],["M.TECH First Year",@mtech_first_year_amount],["M.TECH Second Year",@mtech_second_year_amount]] %>
+				<% @total_sanctioned_amount = @first_year_amount + @second_year_amount + @third_year_amount + @fourth_year_amount + @mtech_first_year_amount + @mtech_second_year_amount %>
+			<br/>
+			<p><b>Total Amount Sanctioned so far is: <%= @total_sanctioned_amount %></b></p>
+		</div>
+		</div>
+	</div>
+</div>
+</div>	

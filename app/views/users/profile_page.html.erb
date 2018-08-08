@@ -1,0 +1,60 @@
+<%= render 'partials/navbarhome' %>
+<% if current_user.user_type == "Student" %>
+	<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+		<div class="col-12">
+			<div class="col-md-6" style="padding: 6%;">
+				<%= image_tag(('avatar.jpg') , class: "img9")%>
+			</div>
+			<div class="col-md-6" style="padding: 3%;">
+			
+			<h2 class="my-text under">My Profile</h2>
+				<br/>
+				<%if @studet %>
+					<p><b class="my-text3">Name : </b><%= @user.full_name %></p>
+					<p><b class="my-text3">Gender : </b><%= @studet.gender %></p>
+					<p><b class="my-text3">Age :</b></p>
+					<p><b class="my-text3">DOB:</b></p>
+					<p><b class="my-text3">PRN : </b><%= @studet.prn %></p>
+					<p><b class="my-text3">Year : </b><%= @studet.year %></p>
+					<p><b class="my-text3">Branch : </b><%= @studet.branch %></p>
+					<p><b class="my-text3">Contact Details : </b><%= @studet.contact_no %></p>
+					<p><b class="my-text3">Permananent Address : </b><%= @studet.address %></p>
+					<p><b class="my-text3">Local Address : </b><%= @studet.address %></p>
+					<hr style="border-color: #dc3d24;">
+					<p><%= link_to "Edit Details",edit_profile_page_path(passed_user: current_user) , class: "btn btn-sm btn-info" %></p>
+				<% else %>
+					<%= link_to "Add your details", new_studentdetail_path , class: "btn btn-sm btn-default" %>
+				<% end %>
+			
+			</div>
+	</div>
+	</div>
+<% elsif current_user.user_type == "Teacher" %>
+	<div class="container" style="padding-top: 4%; padding-bottom: 4%;">
+		<div class="col-12">
+			<div class="col-md-6" style="padding: 8%;">
+				<%= image_tag(('avatar.jpg') , class: "img9")%>
+			</div>
+			<div class="col-md-6" style="padding: 8%">
+			
+			<h2 class="my-text under">My Profile</h2>
+				<br/>
+				<%if @profdet %>
+					<p><b class="my-text3">Name : </b><%= @user.full_name %></p>
+					
+					<p><b class="my-text3">Branch : </b><%= @profdet.branch %></p>
+					<p><b class="my-text3">Contact Details : </b><%= @profdet.contact_no %></p>
+					<p><b class="my-text3">Permananent Address : </b><%= @profdet.address %></p>
+					<p><b class="my-text3">Local Address : </b><%= @profdet.address %></p>
+					
+					<hr style="border-color: #dc3d24;">
+					<p><%= link_to "Edit Details",edit_profile_page_path(passed_user: current_user) , class: "btn btn-sm btn-info" %></p>
+				<% else %>
+					<%= link_to "Add your details", new_profdetail_path , class: "btn btn-sm btn-default" %>
+				<% end %>
+			
+			</div>
+	</div>
+	</div>
+<% end %>
+

@@ -1,0 +1,13 @@
+<%= simple_form_for @activity do |f| %>
+<%= f.error_notification %>
+<div class="form-inputs">
+
+<%= f.input :title, label: "Title" %>
+<%= f.input :desc,label: "Description" %>
+<%= f.input :event_date , label: "Event Date" %>
+<%= f.file_field :attachment ,label: "Attachment" %>
+</div>
+<div class="form-actions">
+<%= f.submit "Add activity", class: "btn btn-md btn-success" %>
+</div>
+<% end %>
